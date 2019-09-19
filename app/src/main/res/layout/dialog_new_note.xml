@@ -1,72 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
 
     <EditText
-        android:id="@+id/Title"
-        android:layout_width="158dp"
+        android:id="@+id/editTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="651dp"
+        android:layout_alignParentBottom="false"
+        android:layout_marginTop="60dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/title_hint" />
 
     <EditText
-        android:id="@+id/Description"
-        android:layout_width="292dp"
+        android:id="@+id/editDescription"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="558dp"
+        android:layout_below="@id/editTitle"
+        android:layout_alignParentBottom="false"
+        android:layout_marginTop="60dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
         android:text="@string/description_hint" />
 
     <CheckBox
-        android:id="@+id/idea"
-        android:layout_width="96dp"
+        android:id="@+id/checkBoxIdea"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="400dp"
+        android:layout_below="@id/editDescription"
+        android:layout_marginTop="60dp"
         android:text="@string/idea_checkbox" />
 
     <CheckBox
-        android:id="@+id/ToDo"
+        android:id="@+id/checkBoxTodo"
         android:layout_width="95dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="310dp"
+        android:layout_below="@id/checkBoxIdea"
+        android:layout_marginTop="60dp"
         android:text="@string/todo_checkbox" />
 
     <CheckBox
-        android:id="@+id/Important"
+        android:id="@+id/checkBoxImportant"
         android:layout_width="119dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="214dp"
+        android:layout_below="@id/checkBoxTodo"
+        android:layout_marginTop="60dp"
         android:text="@string/important_checkbox" />
 
     <Button
-        android:id="@+id/Cancel"
+        android:id="@+id/btnCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="294dp"
-        android:layout_marginRight="294dp"
-        android:layout_marginBottom="75dp"
+        android:layout_below="@id/checkBoxImportant"
+        android:layout_marginTop="60dp"
         android:text="@string/cancel_button" />
 
     <Button
-        android:id="@+id/ok"
+        android:id="@+id/btnOk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_alignBaseline="@id/btnCancel"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="76dp"
+        android:layout_alignParentEnd="true"
         android:text="@string/ok_button" />
 </RelativeLayout>
