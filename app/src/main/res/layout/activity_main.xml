@@ -14,12 +14,4 @@
         tools:layout_editor_absoluteX="135dp"
         tools:layout_editor_absoluteY="341dp" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/baseline_add_white_48"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="111dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

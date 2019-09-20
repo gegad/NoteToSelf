@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="false"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="35dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/title_hint" />
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/editTitle"
         android:layout_alignParentBottom="false"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="35dp"
         android:ems="10"
         android:inputType="textMultiLine"
         android:text="@string/description_hint" />
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/editDescription"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="35dp"
         android:text="@string/idea_checkbox" />
 
     <CheckBox
@@ -38,7 +38,7 @@
         android:layout_width="95dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/checkBoxIdea"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="35dp"
         android:text="@string/todo_checkbox" />
 
     <CheckBox
@@ -46,7 +46,7 @@
         android:layout_width="119dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/checkBoxTodo"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="35dp"
         android:text="@string/important_checkbox" />
 
     <Button
@@ -54,14 +54,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/checkBoxImportant"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="35dp"
         android:text="@string/cancel_button" />
 
     <Button
         android:id="@+id/btnOk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/btnCancel"
+        android:layout_below="@id/checkBoxImportant"
+        android:layout_marginTop="35dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:text="@string/ok_button" />

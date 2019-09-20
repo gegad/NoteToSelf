@@ -16,6 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/imageViewImortant"
+        android:layout_toEndOf="@id/imageViewImortant"
         app:srcCompat="@drawable/baseline_check_box_outline_blank_black_24" />
 
     <ImageView
@@ -23,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/imageViewTodo"
+        android:layout_toEndOf="@id/imageViewTodo"
         app:srcCompat="@drawable/baseline_wb_incandescent_black_24" />
 
     <TextView
@@ -31,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/imageViewImortant"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="35dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
@@ -40,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/txtTitle"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="35dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name" />
@@ -51,6 +53,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/txtDescription"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="200dp"
         android:text="@string/ok_button" />
 </RelativeLayout>
