@@ -20,8 +20,8 @@ public class DialogShowNote extends DialogFragment {
         View dialogView = inflater.inflate(R.layout.dialog_show_note, null);
 
         ImageView ivImportant = dialogView.findViewById(R.id.imageViewImortant);
-        ImageView ivIdea= dialogView.findViewById(R.id.imageViewIdea);
-        ImageView ivTodo = dialogView.findViewById(R.id.imageViewTodo);
+        ImageView ivIdea= dialogView.findViewById(R.id.imageViewIdeaItem);
+        ImageView ivTodo = dialogView.findViewById(R.id.imageViewTodoItem);
 
         TextView txtTitle = dialogView.findViewById(R.id.txtTitle);
         TextView txtDescription = dialogView.findViewById(R.id.txtDescription);

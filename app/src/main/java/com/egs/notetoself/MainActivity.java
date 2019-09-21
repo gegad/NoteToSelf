@@ -3,17 +3,25 @@ package com.egs.notetoself;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.net.http.X509TrustManagerExtensions;
+import android.content.Context;
 import android.os.Bundle;
-import android.os.Trace;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    NoteAdapter mNoteAdapter;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -36,20 +44,73 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button button = (Button) findViewById(R.id.btnShowNote);
-        button.setOnClickListener(new View.OnClickListener() {
+        mNoteAdapter = new NoteAdapter();
+
+        ListView listNote = findViewById(R.id.listView);
+        listNote.setAdapter(mNoteAdapter);
+
+        listNote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int whichItem, long id) {
+                Note tempNote = mNoteAdapter.getItem(whichItem);
                 DialogShowNote dialogShowNote = new DialogShowNote();
-                dialogShowNote.sendNoteSelected(mTempNote);
-                dialogShowNote.show(getSupportFragmentManager(), "123");
+                dialogShowNote.sendNoteSelected(tempNote);
+                dialogShowNote.show(getSupportFragmentManager(), "");
             }
+
         });
-
     }
-    Note mTempNote = new Note();
 
-    public void createNewNote(Note note) {
-        mTempNote = note;
+    public void createNewNote(Note note){
+        mNoteAdapter.addNote(note);
+    }
+
+    public class NoteAdapter extends BaseAdapter {
+        List<Note> mNoteList = new ArrayList<Note>();
+        @Override
+        public int getCount() {
+            return mNoteList.size();
+        }
+
+        @Override
+        public Note getItem(int whichItem) {
+            return mNoteList.get(whichItem);
+        }
+
+        @Override
+        public long getItemId(int whichItem) {
+            return whichItem;
+        }
+
+        @Override
+        public View getView(int whichItem, View view, ViewGroup viewGroup) {
+            if (view == null) {
+                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                view = inflater.inflate(R.layout.list_item, viewGroup, false);
+            }
+            TextView txtTitle = (TextView) view.findViewById(R.id.textTitleItem);
+            TextView txtDescription = (TextView) view.findViewById(R.id.textDescriptionItem);
+            ImageView ivImportant = (ImageView) view.findViewById(R.id.imageViewImportantItem);
+            ImageView ivTodo = (ImageView) view.findViewById(R.id.imageViewTodoItem);
+            ImageView ivIdea = (ImageView) view.findViewById(R.id.imageViewIdeaItem);
+            Note tempNote = mNoteList.get(whichItem);
+            if (!tempNote.isImportant()) {
+                ivImportant.setVisibility(View.GONE);
+            }
+            if (!tempNote.isTodo()) {
+                ivTodo.setVisibility(View.GONE);
+            }
+            if (!tempNote.isIdea()) {
+                ivIdea.setVisibility(View.GONE);
+            }
+            txtTitle.setText(tempNote.getTitle());
+            txtDescription.setText(tempNote.getDescription());
+            return view;
+        }
+
+        public void addNote(Note note){
+            mNoteList.add(note);
+            notifyDataSetChanged();
+        }
     }
 }
