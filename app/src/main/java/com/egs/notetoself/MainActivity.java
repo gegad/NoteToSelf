@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,7 +23,18 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    NoteAdapter mNoteAdapter;
+    private NoteAdapter mNoteAdapter;
+    private boolean mSound;
+    private int mAnimOption;
+    private SharedPreferences mPrefs;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPrefs = getSharedPreferences("Note to self", MODE_PRIVATE);
+        mSound = mPrefs.getBoolean("sound", true);
+        mAnimOption = mPrefs.getInt("anim option", SettingsActivity.FAST);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -35,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_add) {
             DialogNewNote dialogNewNote = new DialogNewNote();
             dialogNewNote.show(getSupportFragmentManager(), "123");
+            return true;
+        }
+        if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
