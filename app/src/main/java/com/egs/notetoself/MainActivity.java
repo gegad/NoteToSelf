@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +35,12 @@ public class MainActivity extends AppCompatActivity {
         mPrefs = getSharedPreferences("Note to self", MODE_PRIVATE);
         mSound = mPrefs.getBoolean("sound", true);
         mAnimOption = mPrefs.getInt("anim option", SettingsActivity.FAST);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mNoteAdapter.saveNotes();
     }
 
     @Override
@@ -84,7 +91,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public class NoteAdapter extends BaseAdapter {
+        private  JSONSerializer mJSONSerializer;
         List<Note> mNoteList = new ArrayList<Note>();
+
+        public NoteAdapter() {
+            mJSONSerializer = new JSONSerializer("NoteToSelf.json",
+                    MainActivity.this.getApplicationContext());
+
+            try {
+                mNoteList = mJSONSerializer.load();
+            } catch (Exception e) {
+                mNoteList = new ArrayList<Note>();
+            }
+        }
+
+        public void saveNotes() {
+            try {
+                mJSONSerializer.save(mNoteList);
+            } catch (Exception e) {
+                Log.i("Error saving", "NotesToSelf.json");
+                Log.i("Error saving","" + e);
+            }
+        }
+
         @Override
         public int getCount() {
             return mNoteList.size();
