@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -29,12 +31,25 @@ public class MainActivity extends AppCompatActivity {
     private int mAnimOption;
     private SharedPreferences mPrefs;
 
+    Animation mAnimFadeIn;
+    Animation mAnimFlash;
+
     @Override
     protected void onResume() {
         super.onResume();
         mPrefs = getSharedPreferences("Note to self", MODE_PRIVATE);
         mSound = mPrefs.getBoolean("sound", true);
         mAnimOption = mPrefs.getInt("anim option", SettingsActivity.FAST);
+
+        mAnimFadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
+        mAnimFlash = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.flash);
+
+        if (mAnimOption == SettingsActivity.FAST) {
+            mAnimFlash.setDuration(100);
+        } else if (mAnimOption == SettingsActivity.SLOW) {
+            mAnimFlash.setDuration(1000);
+        }
+        mNoteAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -141,6 +156,13 @@ public class MainActivity extends AppCompatActivity {
             ImageView ivTodo = (ImageView) view.findViewById(R.id.imageViewTodoItem);
             ImageView ivIdea = (ImageView) view.findViewById(R.id.imageViewIdeaItem);
             Note tempNote = mNoteList.get(whichItem);
+
+            if (tempNote.isImportant() && mAnimOption != SettingsActivity.NONE) {
+                view.setAnimation(mAnimFlash);
+            } else {
+                view.setAnimation(mAnimFadeIn);
+            }
+
             if (!tempNote.isImportant()) {
                 ivImportant.setVisibility(View.GONE);
             }
